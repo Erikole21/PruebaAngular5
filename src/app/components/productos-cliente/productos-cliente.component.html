@@ -1,3 +1,22 @@
-<p>
-  productos-cliente works!
-</p>
+<div>
+    <label>Cliente</label>
+    <select class="form-control" name="cliente" [(ngModel)]="cliente" (ngModelChange)="clienteSeleccionado()"  required>
+      <option *ngFor="let item of clientes" [ngValue]="item">{{ item.Nombre }}</option>
+    </select>
+  </div>
+<div class="top-20">
+    <ngx-charts-bar-vertical *ngIf="cliente"
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="datosGrafica"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    legendTitle="Productos"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel">
+    </ngx-charts-bar-vertical>
+</div>

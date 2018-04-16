@@ -1,3 +1,39 @@
-<p>
-  home works!
-</p>
+<div>
+  <label>Cliente</label>
+  <select class="form-control" name="cliente" [(ngModel)]="cliente" (ngModelChange)="clienteSeleccionado()"  required>
+    <option *ngFor="let item of clientes" [ngValue]="item">{{ item.Nombre }}</option>
+  </select>
+</div>
+<hr>
+<div *ngIf="sinDatos">
+  <div class="alert alert-danger" role="alert">
+     El Cliente: {{ cliente.Nombre }} No tiene productos adquiridos hace un mes.
+  </div>
+</div>
+<div *ngIf="ordenes.length > 0" class="table-responsive  top-10">
+  <table class="table table-hover">
+    <thead class="thead-inverse">
+      <th>Fecha Creación</th>
+      <th>Número de Orden</th>
+      <th>Total $</th>
+      <th>Dirección Entrega</th>
+      <th>Productos</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orden of ordenes">
+          <td>{{ orden.FechaRegistro | date:'yyyy-MM-dd' }}</td>
+          <td>{{ orden.Id }}</td>
+          <td>{{ orden.ValorTotal | currency }}</td>
+          <td>{{ orden.DireccionEntrega }}</td>
+          <td>
+            <tr *ngFor="let detalle of orden.Detalle">
+                <td>{{ detalle.Cantidad }}</td>
+                <td> X </td>
+                <td>{{ detalle.Producto.Nombre }}</td>
+            </tr>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
